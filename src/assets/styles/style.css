@@ -174,7 +174,7 @@
   justify-content: space-between;
 }
 
-.note-item__button-delete, .note-item__button-archive {
+.note-item__button-delete, .note-item__button-archive, .note-item__button-move {
   flex-basis: 126px;
   font-family: 'IBM Plex Mono', monospace;
   font-weight: normal;
@@ -195,10 +195,26 @@
   background-color: #DD8B8B;
 }
 
-.note-item__button-archive {
+.note-item__button-archive, .note-item__button-move {
   background-color: #FFA401;
 }
 
+.note-list-empty {
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 40px;
+  text-align: center;
+}
+
+.note-footer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  font-weight: normal;
+  padding: 80px 0px 40px 0px;
+}
+
+.note-footer p {
+  margin-bottom: 20px;
+}
 
 @media only screen and (max-width: 925px) {
   .note-app__header-logo {
@@ -228,5 +244,11 @@
   .note-item__button-wrap {
     position: none;
     bottom: 20px;;
+  }
+
+  .note-footer {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
   }
 }

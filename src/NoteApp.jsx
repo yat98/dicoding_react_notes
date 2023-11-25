@@ -29,7 +29,16 @@ export default class NotesApp extends React.Component {
           title="List Note" 
           desc="create and manage organized lists of notes seamlessly" 
         />
-        <NoteList notes={this.state.notes} />
+        <NoteList notes={this.state.notes.filter(note => !note.archived)} type="list" />
+        <NoteSectionTitle 
+          title="Archive Note" 
+          desc="seamlessly archive notes that are no longer immediately relevant but still important for reference" 
+        />
+        <NoteList notes={this.state.notes.filter(note => note.archived)} type="archive" />
+        <div className="note-footer">
+          <p>Made with 💙 from Gorontalo. Insipired from <a href="https://saweria.co/">saweria</a> UI design.</p>
+          <p>PT Harta Tahta Sudah Saja</p>
+        </div>
       </div>
     );
   }
