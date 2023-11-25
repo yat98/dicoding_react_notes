@@ -21,8 +21,32 @@ export default class NotesApp extends React.Component {
     autoBind(this);
   }
 
-  onAddNoteEventHandler() {
-    
+  onAddNoteEventHandler({ title, body }) {
+    const notes = {
+      id: +new Date(),
+      title,
+      body,
+      createdAt: new Date().toISOString(),
+      archived: false,
+    };
+
+    this.setState((previousState) => ({
+      notes: [
+        notes,
+        ...previousState.notes,
+      ],
+      searchNotes: [
+        notes,
+        ...previousState.notes,
+      ]
+    }));
+
+    Swal.fire({
+      title: "Added!",
+      text: "Your note has been added.",
+      icon: "success",
+      confirmButtonColor: "#8BD3DD",
+    });
   }
 
   onArchiveNoteEventHandler(id) {
@@ -99,7 +123,7 @@ export default class NotesApp extends React.Component {
           title="Add Note" 
           desc="quick and intuitive tool that enables users to capture and store important information effortlessly" 
         />
-        <AddNote />
+        <AddNote addNote={this.onAddNoteEventHandler} />
         <NoteSectionTitle 
           title="List Note" 
           desc="create and manage organized lists of notes seamlessly" 
