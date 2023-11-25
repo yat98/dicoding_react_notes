@@ -28,12 +28,92 @@
   outline: none;
   padding: 5px 0px;
   font-size: 18px;
-  columns: #696868;
   width: 300px;
   background-color: transparent;
   border-bottom: 1px solid black;
   font-family: 'IBM Plex Mono', monospace;
   font-weight: light;
+}
+
+.note-section {
+  margin-top: 65px;
+  font-family: 'Comfortaa', sans-serif;
+}
+
+.note-section__title {
+  font-weight: bold;
+}
+
+.note-section__desc {
+  font-weight: light;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.note-add {
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 20px;
+  border: 1px solid black;
+  box-shadow: 6px 6px 0px 0px black;
+  border-radius: 5px;
+  background-color: #F2F7F5;
+  margin-top: 40px;
+}
+
+.note-add__title{
+  font-weight: normal;
+  margin-bottom: 25px;
+}
+
+.note-add__input, .note-add__textarea {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.note-add__input {
+  border: none;
+  outline: none;
+  padding: 5px 0px;
+  font-size: 18px;
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: light;
+  margin-bottom: 30px;
+}
+
+.note-add__textarea {
+  border: none;
+  outline: none;
+  padding: 5px 0px;
+  font-size: 18px;
+  background-color: transparent;
+  border: 2px solid black;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: light;
+}
+
+.note-add__textarea-character {
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: light;
+  margin-top: 0px;
+}
+
+.note-add__button-save {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: normal;
+  font-size: 20px;
+  padding: 15px;
+  border: 1px solid black;
+  box-shadow: 6px 6px 0px 0px black;
+  border-radius: 5px;
+  background-color: #8BD3DD;
+  margin-top: 40px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -46,8 +126,9 @@
     display: block;
   }  
 
-  .note-app__header-search  {
-    margin: 0px 20px;
+  .note-app__header-search, .note-section, .note-add  {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
   .note-app__header-search-input {
