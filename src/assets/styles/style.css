@@ -66,6 +66,12 @@
   margin-bottom: 25px;
 }
 
+.note-add__title-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .note-add__input, .note-add__textarea {
   display: block;
   width: 100%;
