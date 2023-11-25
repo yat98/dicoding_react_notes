@@ -128,13 +128,21 @@ export default class NotesApp extends React.Component {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
+        this.setState((previousState) => {
+          const notes = previousState.notes.filter((note) => note.id !== id);
+
+          return {
+            notes,
+            searchNotes: notes
+          };
+        });
+
         Swal.fire({
           title: "Deleted!",
           text: "Your note has been deleted.",
           icon: "success",
           confirmButtonColor: "#8BD3DD",
         });
-        console.log(id);
       }
     });
   }
