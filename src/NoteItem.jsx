@@ -1,13 +1,13 @@
 import { showFormattedDate } from "./utils";
 
 /* eslint-disable react/prop-types */
-function NoteItem({ title, body, createdAt, type }) {
+function NoteItem({ id, title, body, createdAt, type, deleteNote, moveNote, archiveNote }) {
   let secondButton;
 
   if(type === 'archive') {
-    secondButton = <button type="submit" className="note-item__button-move">Move Note</button>
+    secondButton = <button type="submit" className="note-item__button-move" onClick={() => moveNote(id)}>Move Note</button>
   } else{
-    secondButton = <button type="submit" className="note-item__button-archive">Archive Note</button>
+    secondButton = <button type="submit" className="note-item__button-archive" onClick={() => archiveNote(id)}>Archive Note</button>
   }
 
   return (
@@ -17,7 +17,7 @@ function NoteItem({ title, body, createdAt, type }) {
       <p className="note-item__body">{ body }</p>
       <div className="note-item__button-wrap">
         <div className="note-item__button">
-          <button type="submit" className="note-item__button-delete">Delete Note</button>
+          <button type="submit" className="note-item__button-delete" onClick={() => deleteNote(id)}>Delete Note</button>
           {secondButton}
         </div>
       </div>

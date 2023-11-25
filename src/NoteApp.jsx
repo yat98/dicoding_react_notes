@@ -5,15 +5,90 @@ import './assets/styles/style.css';
 import NoteSectionTitle from "./NoteSectionTitle";
 import { getInitialData } from "./utils";
 import NoteList from "./NoteList";
+import autoBind from 'auto-bind';
+import Swal from 'sweetalert2';
 
 export default class NotesApp extends React.Component {
   constructor(props) {
     super(props);
+
     const notes = getInitialData();
     this.state = {
       notes,
       searchNotes: notes,
     };
+
+    autoBind(this);
+  }
+
+  onAddNoteEventHandler() {
+    
+  }
+
+  onArchiveNoteEventHandler(id) {
+    Swal.fire({
+      title: "Are you sure to archive note?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#8BD3DD",
+      cancelButtonColor: "#DD8B8B",
+      confirmButtonText: "Yes, archive it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Archived!",
+          text: "Your note has been archived.",
+          icon: "success",
+          confirmButtonColor: "#8BD3DD",
+        });
+        console.log(id);
+      }
+    });
+  }
+
+  onMoveNoteEventHandler(id) {
+    Swal.fire({
+      title: "Are you sure to move note?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#8BD3DD",
+      cancelButtonColor: "#DD8B8B",
+      confirmButtonText: "Yes, move it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Moved!",
+          text: "Your note has been moved.",
+          icon: "success",
+          confirmButtonColor: "#8BD3DD",
+        });
+        console.log(id);
+      }
+    });
+  }
+
+  onDeleteNoteEventHandler(id) {
+    Swal.fire({
+      title: "Are you sure to delete note?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#8BD3DD",
+      cancelButtonColor: "#DD8B8B",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your note has been deleted.",
+          icon: "success",
+          confirmButtonColor: "#8BD3DD",
+        });
+        console.log(id);
+      }
+    });
   }
 
   render() {
@@ -29,12 +104,18 @@ export default class NotesApp extends React.Component {
           title="List Note" 
           desc="create and manage organized lists of notes seamlessly" 
         />
-        <NoteList notes={this.state.notes.filter(note => !note.archived)} type="list" />
+        <NoteList notes={this.state.notes.filter(note => !note.archived)} type="list" 
+          deleteNote={this.onDeleteNoteEventHandler}
+          moveNote={this.onMoveNoteEventHandler}
+          archiveNote={this.onArchiveNoteEventHandler} />
         <NoteSectionTitle 
           title="Archive Note" 
           desc="seamlessly archive notes that are no longer immediately relevant but still important for reference" 
         />
-        <NoteList notes={this.state.notes.filter(note => note.archived)} type="archive" />
+        <NoteList notes={this.state.notes.filter(note => note.archived)} type="archive" 
+          deleteNote={this.onDeleteNoteEventHandler}
+          moveNote={this.onMoveNoteEventHandler}
+          archiveNote={this.onArchiveNoteEventHandler} />
         <div className="note-footer">
           <p>Made with 💙 from Gorontalo. Insipired from <a href="https://saweria.co/">saweria</a> UI design.</p>
           <p>PT Harta Tahta Sudah Saja</p>
