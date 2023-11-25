@@ -94,13 +94,25 @@ export default class NotesApp extends React.Component {
       confirmButtonText: "Yes, move it!"
     }).then((result) => {
       if (result.isConfirmed) {
+        this.setState((previousState) => {
+          const noteIndex = previousState.notes.findIndex((note) => note.id === id);
+          const note = previousState.notes.find((note) => note.id === id);
+          note.archived = false;
+
+          previousState.notes[noteIndex] = note;
+
+          return {
+            notes: previousState.notes,
+            searchNotes: previousState.notes
+          };
+        });
+
         Swal.fire({
           title: "Moved!",
           text: "Your note has been moved.",
           icon: "success",
           confirmButtonColor: "#8BD3DD",
         });
-        console.log(id);
       }
     });
   }
