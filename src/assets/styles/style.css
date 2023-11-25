@@ -1,0 +1,56 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.note-app {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.note-app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+}
+
+.note-app__header-search {
+  border-radius: 5px;
+  padding: 18px 22px;
+  border: 1px solid black;
+  box-shadow: 6px 6px 0px 0px black;
+}
+
+.note-app__header-search-input {
+  border: none;
+  outline: none;
+  padding: 5px 0px;
+  font-size: 18px;
+  columns: #696868;
+  width: 300px;
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: light;
+}
+
+@media only screen and (max-width: 768px) {
+  .note-app__header-logo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .note-app__header {
+    display: block;
+  }  
+
+  .note-app__header-search  {
+    margin: 0px 20px;
+  }
+
+  .note-app__header-search-input {
+    width: 100%;
+  }
+}
