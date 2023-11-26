@@ -1,8 +1,22 @@
-# React + Vite
+<h1 align="center">notes.co</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img href="/.github/image/app_ui.png" />
+</p>
+<h2>Description</h2>
+<p>
+ This is last project submission for <a href="https://www.dicoding.com/academies/403">Dicoding class</a>  using React JS. It has add, delete, archive and search note feature.
+<p>
 
-Currently, two official plugins are available:
+<h3>Instalation</h3>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Install modules
+
+```bash
+$ npm install
+```
+
+<h3>Running App</h3>
+
+```bash
+$ npm run dev
