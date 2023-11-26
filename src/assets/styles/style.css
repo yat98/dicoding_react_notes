@@ -165,6 +165,7 @@
 .note-item__body {
   font-size: 18px;
   text-align: justify;
+  white-space: pre-line;
 }
 
 .note-item__button-wrap {

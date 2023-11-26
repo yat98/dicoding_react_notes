@@ -13,8 +13,8 @@ function NoteItem({ id, title, body, createdAt, type, deleteNote, moveNote, arch
   return (
     <div className="note-item">
       <h3 className="note-item__title">{ title }</h3>
-      <p className="note-item__date">{ showFormattedDate(createdAt) }</p>
-      <p className="note-item__body">{ body }</p>
+      <div className="note-item__date">{ showFormattedDate(createdAt) }</div>
+      <div className="note-item__body">{ body }</div>
       <div className="note-item__button-wrap">
         <div className="note-item__button">
           <button type="submit" className="note-item__button-delete" onClick={() => deleteNote(id)}>Delete Note</button>

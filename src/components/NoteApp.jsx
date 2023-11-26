@@ -16,6 +16,7 @@ export default class NotesApp extends React.Component {
     this.state = {
       notes,
       searchNotes: notes,
+      keyword: ''
     };
 
     autoBind(this);
@@ -104,16 +105,31 @@ export default class NotesApp extends React.Component {
     const keyword = e.target.value.toLowerCase();
     if(keyword.length === 0 || keyword === '') {
       this.setState((previousState) => ({
+        keyword,
         notes: previousState.searchNotes,
       }));
     } else {
       this.setState((previousState) => ({
+        keyword,
         notes: previousState.searchNotes.filter((note) => note.title.toLowerCase().includes(keyword)),
       }));
     }
   }
 
   render() {
+    const notes = this.state.notes;
+    const keyword = this.state.keyword;
+
+    const listNotes = notes.filter((note) => 
+      note.title.toLowerCase().includes(keyword.toLocaleLowerCase()) 
+      && !note.archived
+    );
+
+    const archiveNotes = notes.filter((note) => 
+      note.title.toLowerCase().includes(keyword.toLocaleLowerCase()) 
+      && note.archived
+    );
+    
     return (
       <div className="note-app">
         <NoteHeader searchNote={this.onChangeSearchNoteEventHandler} />
@@ -127,7 +143,7 @@ export default class NotesApp extends React.Component {
           desc="create and manage organized lists of notes seamlessly" 
         />
         <NoteList type="list" 
-          notes={this.state.notes.filter(note => !note.archived)} 
+          notes={listNotes} 
           deleteNote={this.onDeleteNoteEventHandler}
           moveNote={this.onMoveNoteEventHandler}
           archiveNote={this.onArchiveNoteEventHandler} />
@@ -136,7 +152,7 @@ export default class NotesApp extends React.Component {
           desc="seamlessly archive notes that are no longer immediately relevant but still important for reference" 
         />
         <NoteList type="archive" 
-          notes={this.state.notes.filter(note => note.archived)} 
+          notes={archiveNotes} 
           deleteNote={this.onDeleteNoteEventHandler}
           moveNote={this.onMoveNoteEventHandler}
           archiveNote={this.onArchiveNoteEventHandler} />

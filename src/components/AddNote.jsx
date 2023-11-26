@@ -47,7 +47,7 @@ class AddNote extends React.Component {
     this.setState({ body });
   }
 
-  onSubmitEventHandler(e) {
+  onSubmitHandler = (e) => {
     e.preventDefault();
     this.props.addNote(this.state);
     this.setState({ 
@@ -59,7 +59,7 @@ class AddNote extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmitEventHandler} className="note-add">
+      <form onSubmit={this.onSubmitHandler} className="note-add">
         <h2 className="note-add__title">Note :</h2>
         <div>
           <div className="note-add__title-label">

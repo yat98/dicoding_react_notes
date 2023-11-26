@@ -2,7 +2,7 @@
 import NoteItem from "./NoteItem";
 
 function NoteList({ notes, type, deleteNote, moveNote, archiveNote }) {
-  if(notes.length === 0) return (
+  if(!notes.length) return (
     <div className="note-list-empty">
       <h4>Note is empty</h4>
     </div>
