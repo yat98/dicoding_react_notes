@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { showFormattedDate } from "./utils";
+import { showFormattedDate } from "../utils";
 
 function NoteItem({ id, title, body, createdAt, type, deleteNote, moveNote, archiveNote }) {
   let secondButton;

@@ -1,9 +1,9 @@
 import React from "react";
 import AddNote from "./AddNote";
 import NoteHeader from "./NoteHeader";
-import './assets/styles/style.css';
+import '../assets/styles/style.css';
 import NoteSectionTitle from "./NoteSectionTitle";
-import { confirmAlert, getInitialData, notificationAlert } from "./utils";
+import { confirmAlert, getInitialData, notificationAlert } from "../utils";
 import NoteList from "./NoteList";
 import autoBind from 'auto-bind';
 import NoteFooter from "./NoteFooter";
@@ -31,8 +31,8 @@ export default class NotesApp extends React.Component {
     };
 
     this.setState((previousState) => ({
-      notes: [ notes, ...previousState.searchNote ],
-      searchNotes: [ notes, ...previousState.searchNote ]
+      notes: [ notes, ...previousState.searchNotes ],
+      searchNotes: [ notes, ...previousState.searchNotes ]
     }));
 
     notificationAlert("Added!", "Your note has been added.");
@@ -101,7 +101,7 @@ export default class NotesApp extends React.Component {
   }
 
   onChangeSearchNoteEventHandler(e) {
-    const keyword = e.target.value;
+    const keyword = e.target.value.toLowerCase();
     if(keyword.length === 0 || keyword === '') {
       this.setState((previousState) => ({
         notes: previousState.searchNotes,
