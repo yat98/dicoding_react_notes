@@ -5,7 +5,7 @@
 </p>
 <h2>Description</h2>
 <p>
- This is last project submission for <a href="https://www.dicoding.com/academies/403">Dicoding class</a>  using React JS. It has add, delete, archive and search note feature.
+ This is last project submission for <a href="https://www.dicoding.com/academies/403">Dicoding class</a>  using React JS. It has add, delete, archive and search note feature. the UI inspired from saweria.
 <p>
 
 <h3>Instalation</h3>
