@@ -3,10 +3,10 @@ import AddNote from "./AddNote";
 import NoteHeader from "./NoteHeader";
 import './assets/styles/style.css';
 import NoteSectionTitle from "./NoteSectionTitle";
-import { getInitialData } from "./utils";
+import { confirmAlert, getInitialData, notificationAlert } from "./utils";
 import NoteList from "./NoteList";
 import autoBind from 'auto-bind';
-import Swal from 'sweetalert2';
+import NoteFooter from "./NoteFooter";
 
 export default class NotesApp extends React.Component {
   constructor(props) {
@@ -31,126 +31,92 @@ export default class NotesApp extends React.Component {
     };
 
     this.setState((previousState) => ({
-      notes: [
-        notes,
-        ...previousState.notes,
-      ],
-      searchNotes: [
-        notes,
-        ...previousState.notes,
-      ]
+      notes: [ notes, ...previousState.searchNote ],
+      searchNotes: [ notes, ...previousState.searchNote ]
     }));
 
-    Swal.fire({
-      title: "Added!",
-      text: "Your note has been added.",
-      icon: "success",
-      confirmButtonColor: "#8BD3DD",
-    });
+    notificationAlert("Added!", "Your note has been added.");
   }
 
   onArchiveNoteEventHandler(id) {
-    Swal.fire({
-      title: "Are you sure to archive note?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#8BD3DD",
-      cancelButtonColor: "#DD8B8B",
-      confirmButtonText: "Yes, archive it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.setState((previousState) => {
-          const noteIndex = previousState.notes.findIndex((note) => note.id === id);
-          const note = previousState.notes.find((note) => note.id === id);
-          note.archived = true;
+    confirmAlert("Are you sure to archive note?", "You won't be able to revert this!", "Yes, archive it!")
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.setState((previousState) => {
+            const noteIndex = previousState.searchNotes.findIndex((note) => note.id === id);
+            const note = previousState.searchNotes.find((note) => note.id === id);
+            note.archived = true;
 
-          previousState.notes[noteIndex] = note;
+            previousState.searchNotes[noteIndex] = note;
 
-          return {
-            notes: previousState.notes,
-            searchNotes: previousState.notes
-          };
-        });
+            return {
+              notes: previousState.searchNotes,
+              searchNotes: previousState.searchNotes
+            };
+          });
 
-        Swal.fire({
-          title: "Archived!",
-          text: "Your note has been archived.",
-          icon: "success",
-          confirmButtonColor: "#8BD3DD",
-        });
-      }
-    });
+          notificationAlert("Archived!", "Your note has been archived.");
+        }
+      });
   }
 
   onMoveNoteEventHandler(id) {
-    Swal.fire({
-      title: "Are you sure to move note?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#8BD3DD",
-      cancelButtonColor: "#DD8B8B",
-      confirmButtonText: "Yes, move it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.setState((previousState) => {
-          const noteIndex = previousState.notes.findIndex((note) => note.id === id);
-          const note = previousState.notes.find((note) => note.id === id);
-          note.archived = false;
+    confirmAlert("Are you sure to move note?", "You won't be able to revert this!", "Yes, move it!")
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.setState((previousState) => {
+            const noteIndex = previousState.searchNotes.findIndex((note) => note.id === id);
+            const note = previousState.searchNotes.find((note) => note.id === id);
+            note.archived = false;
 
-          previousState.notes[noteIndex] = note;
+            previousState.notes[noteIndex] = note;
 
-          return {
-            notes: previousState.notes,
-            searchNotes: previousState.notes
-          };
-        });
-
-        Swal.fire({
-          title: "Moved!",
-          text: "Your note has been moved.",
-          icon: "success",
-          confirmButtonColor: "#8BD3DD",
-        });
-      }
-    });
+            return {
+              notes: previousState.searchNotes,
+              searchNotes: previousState.searchNotes
+            };
+          });
+          
+          notificationAlert("Moved!", "Your note has been moved.");
+        }
+      });
   }
 
   onDeleteNoteEventHandler(id) {
-    Swal.fire({
-      title: "Are you sure to delete note?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#8BD3DD",
-      cancelButtonColor: "#DD8B8B",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.setState((previousState) => {
-          const notes = previousState.notes.filter((note) => note.id !== id);
+    confirmAlert("Are you sure to delete note?", "You won't be able to revert this!", "Yes, delete it!")
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.setState((previousState) => {
+            const notes = previousState.searchNotes.filter((note) => note.id !== id);
 
-          return {
-            notes,
-            searchNotes: notes
-          };
-        });
+            return {
+              notes,
+              searchNotes: notes
+            };
+          });
 
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your note has been deleted.",
-          icon: "success",
-          confirmButtonColor: "#8BD3DD",
-        });
-      }
-    });
+          notificationAlert("Deleted!", "Your note has been deleted.")
+        }
+      });
+  }
+
+  onChangeSearchNoteEventHandler(e) {
+    const keyword = e.target.value;
+    if(keyword.length === 0 || keyword === '') {
+      this.setState((previousState) => ({
+        notes: previousState.searchNotes,
+      }));
+    } else {
+      this.setState((previousState) => ({
+        notes: previousState.searchNotes.filter((note) => note.title.toLowerCase().includes(keyword)),
+      }));
+    }
   }
 
   render() {
     return (
       <div className="note-app">
-        <NoteHeader />
+        <NoteHeader searchNote={this.onChangeSearchNoteEventHandler} />
         <NoteSectionTitle 
           title="Add Note" 
           desc="quick and intuitive tool that enables users to capture and store important information effortlessly" 
@@ -160,7 +126,8 @@ export default class NotesApp extends React.Component {
           title="List Note" 
           desc="create and manage organized lists of notes seamlessly" 
         />
-        <NoteList notes={this.state.notes.filter(note => !note.archived)} type="list" 
+        <NoteList type="list" 
+          notes={this.state.notes.filter(note => !note.archived)} 
           deleteNote={this.onDeleteNoteEventHandler}
           moveNote={this.onMoveNoteEventHandler}
           archiveNote={this.onArchiveNoteEventHandler} />
@@ -168,14 +135,12 @@ export default class NotesApp extends React.Component {
           title="Archive Note" 
           desc="seamlessly archive notes that are no longer immediately relevant but still important for reference" 
         />
-        <NoteList notes={this.state.notes.filter(note => note.archived)} type="archive" 
+        <NoteList type="archive" 
+          notes={this.state.notes.filter(note => note.archived)} 
           deleteNote={this.onDeleteNoteEventHandler}
           moveNote={this.onMoveNoteEventHandler}
           archiveNote={this.onArchiveNoteEventHandler} />
-        <div className="note-footer">
-          <p>Made with 💙 from Gorontalo. Insipired from <a href="https://saweria.co/">saweria</a> UI design.</p>
-          <p>PT Harta Tahta Sudah Saja</p>
-        </div>
+        <NoteFooter />
       </div>
     );
   }

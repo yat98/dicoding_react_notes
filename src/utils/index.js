@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 const getInitialData = () => ([
   {
     id: 1,
@@ -53,4 +55,25 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options)
 }
 
-export { getInitialData, showFormattedDate };
+const notificationAlert = (title, text) => {
+  Swal.fire({
+    title,
+    text,
+    icon: "success",
+    confirmButtonColor: "#8BD3DD",
+  });
+}
+
+const confirmAlert = (title, text, confirmButtonText) => {
+  return Swal.fire({
+    title,
+    text,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#8BD3DD",
+    cancelButtonColor: "#DD8B8B",
+    confirmButtonText,
+  });
+}
+
+export { getInitialData, showFormattedDate, notificationAlert, confirmAlert };
