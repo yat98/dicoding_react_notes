@@ -1,7 +1,7 @@
 <h1 align="center">notes.co</h1>
 
 <p align="center">
-  <img href="/.github/image/app_ui.png" />
+  <img href="https://raw.githubusercontent.com/yat98/dicoding_react_notes%20/main/.github/image/app_ui.png" />
 </p>
 <h2>Description</h2>
 <p>
